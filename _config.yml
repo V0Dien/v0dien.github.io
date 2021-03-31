@@ -9,7 +9,7 @@
 # --------------------------
 title: Vô Diện (@F4c3l3ss_)                         # the main title
 
-tagline: Blue team by day, blogger by night.  # it will display as the sub-title
+tagline: Hi! 👻  # it will display as the sub-title
 
 description: >-                        # used by seo meta and the atom feed
   A site record my blog and save my knowledge
@@ -194,3 +194,4 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
