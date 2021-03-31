@@ -10,7 +10,7 @@ categories: [Writeup]
 
 ### 1. Time2Attack
 
-Trong bài này, ban tổ chức (BTC) cung cấp 1 file pcap. Sau khi mở bằng wireshark ta có 1 file zip với tên `time.zip`. Nhận thấy đây là 1 file zip yêu cầu password, đồng thời yêu cầu nhập password để mở mà với thông tin trước đó BTC có yêu cầu có tool bruce force nên mình sử dụng `john the ripper` để thử dò password xem sao.
+Trong bài này, ban tổ chức (BTC) cung cấp 1 file pcap. Sau khi mở bằng wireshark ta có 1 file zip với tên `time.zip`. Nhận thấy đây là 1 file zip yêu cầu password để mở đồng thời thông tin trước đó BTC yêu cầu tool bruce force nên mình sử dụng `john the ripper` để dò password xem sao.
 
 ```bash
 $ zip2john time.zip > time.hash
@@ -18,8 +18,6 @@ $ john  --wordlist=rockyou.txt -format:zip time.hash
 ```
 
 Và mình có được password là `!@#$%`. Tiếp đến, trong file zip là một file text với nội dung gần như là mã base64, nhìn lại file text có tên là rot-me, vậy có thể là sự xáo trộn của 2 mã này, dùng `CyberChef` decrypt theo flow: data -> rot13 -> base63 -> image, mình get được ảnh có chứa flag
-
-![IMG](/assets/img/blog/2_dientapnhnn_31032021.JPG)
 
 ![IMG](/assets/img/blog/flag_decode.jpg)
 
