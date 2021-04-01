@@ -57,7 +57,7 @@ Flag: ATTT{CVE-2020-1181/hr01/10.3.1.65}
 
 ### 6. Am I qualified to be your hacker?
 
-Bài này BTC cung cấp file save của Process Monitor, quan sát Process Tree, ta thấy ngày tiến trình EQNEDT32.EXE đang call tiến trình call là powershell và cmd, nhìn phát ra ngày là CVE-2017-11182. 
+Bài này BTC cung cấp file save của Process Monitor, quan sát Process Tree, ta thấy ngày tiến trình EQNEDT32.EXE đang call tiến trình call là powershell và cmd, nhìn phát ra ngày là CVE-2017-11882. 
 
 ![IMG](/assets/img/blog/7_dientapnhnn_31032021.JPG)
 
@@ -65,7 +65,7 @@ Phần còn lại là xác định file Word mà user hr01 đã mở, ta để t
 
 ![IMG](/assets/img/blog/8_dientapnhnn_31032021.JPG)
 
-Flag: ATTT{CV-HuyTQ.doc;CVE-2017-11182}
+Flag: ATTT{CV-HuyTQ.doc;CVE-2017-11882}
 
 
 
