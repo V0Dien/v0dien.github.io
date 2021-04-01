@@ -17,7 +17,7 @@ $ zip2john time.zip > time.hash
 $ john  --wordlist=rockyou.txt -format:zip time.hash
 ```
 
-Và mình có được password là `!@#$%`. Tiếp đến, trong file zip là một file text với nội dung gần như là mã base64, nhìn lại file text có tên là rot-me, vậy có thể là sự xáo trộn của 2 mã này, dùng `CyberChef` decrypt theo flow: data -> rot13 -> base63 -> image, mình get được ảnh có chứa flag
+Và mình có được password là `!@#$%`. Tiếp đến, trong file zip là một file text với nội dung gần như là mã base64, nhìn lại file text có tên là rot-me, vậy có thể là sự xáo trộn của 2 mã này, dùng `CyberChef` decrypt theo flow: data -> rot13 -> base64 -> image, mình get được ảnh có chứa flag
 
 ![IMG](/assets/img/blog/1_dientapnhnn_31032021.JPG)
 
