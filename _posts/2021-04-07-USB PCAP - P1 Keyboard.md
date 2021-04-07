@@ -29,7 +29,7 @@ Với các mã hex tương ứng cho câu lệnh lọc gói tin trên Wireshark,
 
 ### Interrupt Transfers
 
-Dạng giao thức được dùng để truyền dữ liệu từ bán phím, chuột đến máy tính
+Dạng giao thức được dùng để truyền dữ liệu từ bàn phím, chuột đến máy tính
 
 ### Isochronous Transfers
 
