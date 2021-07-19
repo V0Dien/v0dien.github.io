@@ -1,0 +1,86 @@
+I"�<h2 id="0x01-ứng-cứu-sự-cố-điều-tra-số">0x01: Ứng cứu sự cố, điều tra số</h2>
+
+<h3 id="1-time2attack">1. Time2Attack</h3>
+
+<p>Trong bài này, ban tổ chức (BTC) cung cấp 1 file pcap. Sau khi mở bằng wireshark ta có 1 file zip với tên <code class="language-plaintext highlighter-rouge">time.zip</code>. Nhận thấy đây là 1 file zip yêu cầu password để mở đồng thời thông tin trước đó BTC yêu cầu tool bruce force nên mình sử dụng <code class="language-plaintext highlighter-rouge">john the ripper</code> để dò password xem sao.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>zip2john time.zip <span class="o">&gt;</span> time.hash
+<span class="nv">$ </span>john  <span class="nt">--wordlist</span><span class="o">=</span>rockyou.txt <span class="nt">-format</span>:zip time.hash
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Và mình có được password là <code class="language-plaintext highlighter-rouge">!@#$%</code>. Tiếp đến, trong file zip là một file text với nội dung gần như là mã base64, nhìn lại file text có tên là rot-me, vậy có thể là sự xáo trộn của 2 mã này, dùng <code class="language-plaintext highlighter-rouge">CyberChef</code> decrypt theo flow: data -&gt; rot13 -&gt; base64 -&gt; image, mình get được ảnh có chứa flag</p>
+
+<p><img src="/assets/img/blog/1_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p><img src="/assets/img/blog/flag_decode.jpg" alt="IMG" /></p>
+
+<h3 id="2-meow">2. Meow</h3>
+
+<p>Đề bài yêu cầu tìm thời gian mà user meow được tạo ra theo log event của Windows. Ban đầu mình sử dụng tìm kiếm theo event ID tạo user là 4720 nhưng không tìm thấy event nào, cũng lúc ấy một người anh trong team nói log AD server, ngẫm lại thì 4720 là log của máy local, nếu dùng AD thì sẽ không thể có log 4720 được nên mình dùng chức năng tìm kiếm mình có tìm thấy 2 event tạo user thông qua 2 tiến trình <code class="language-plaintext highlighter-rouge">net.exe</code> và <code class="language-plaintext highlighter-rouge">net1.exe</code>. Search google thì 2 tiến trình này là gần giống nhau trong đó lệnh <code class="language-plaintext highlighter-rouge">net.exe</code> đã được sửa để vá lỗi Y2K (sự cố máy tính năm 2000) và <code class="language-plaintext highlighter-rouge">net1.exe</code> là phiên bản cũ hơn để sử dụng tính tương thích ngược. Và cũng không xác định được time nào chính xác hơn mà BTC cho 10 lần submit nên mình submit cả 2 và đáp án là time đã call <code class="language-plaintext highlighter-rouge">net1.exe</code></p>
+
+<p>Flag: ATTT{24/03/2021-09:28:18}</p>
+
+<h3 id="3-who-let-the-cats-in">3. Who let the cats in?</h3>
+
+<p>Sử dụng đáp án của câu trên, mình có được event đã tạo user từ đó lấy được <code class="language-plaintext highlighter-rouge">Logon ID:	0x175CBA</code>, trace back Logon ID này với time kết nối gần nhất.</p>
+
+<p><img src="/assets/img/blog/2_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p>Flag: ATTT{192.168.95.133-50921}</p>
+
+<h3 id="5-command-sharing-point">5. Command Sharing Point</h3>
+
+<p>Ngay khi nhận được file pcap, nhận thấy trong các gói tin có chứa shellcode, nên mình export toàn bộ file cũng như xem số thứ tự packet. Đầu tiên có IP: <code class="language-plaintext highlighter-rouge">10.3.1.65</code> truy cập và thực hiện command trên server và exploit 2 user là <code class="language-plaintext highlighter-rouge">hro1</code> cùng <code class="language-plaintext highlighter-rouge">sp_farm</code>.</p>
+
+<p><img src="/assets/img/blog/3_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p><img src="/assets/img/blog/4_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p>Nhưng khi nhìn lại tại gói streams 749 đã cho mình thấy rằng đã tồn tại file <code class="language-plaintext highlighter-rouge">reverse_shell.txt</code>. Vậy có thể trên máy đã bị exploit từ trước đó và IP <code class="language-plaintext highlighter-rouge">10.3.1.65</code> là địa chỉ C2. Sau một thời gian tìm kiếm đồng đội mình có tìm thấy tại streams 340 có lệnh tạo user và stream 1233 có tải shell từ IP <code class="language-plaintext highlighter-rouge">10.3.1.65</code>.</p>
+
+<p><img src="/assets/img/blog/5_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p><img src="/assets/img/blog/6_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p>Ngoài ra khi nhìn thấy payload, google search ra được <a href="https://www.thezdi.com/blog/2020/6/16/cve-2020-1181-sharepoint-remote-code-execution-through-web-parts">CVE-2020-1181</a>. Và các session để exploit sử dụng login là user <code class="language-plaintext highlighter-rouge">hr01</code>, việc còn lại là xác định IP, ban đầu team mình nghĩ là IP <code class="language-plaintext highlighter-rouge">192.168.95.130</code> vì đây là IP thực hiện exploit, tuy nhiên theo đáp án của BTC thì IP đúng cho flag là IP C2: <code class="language-plaintext highlighter-rouge">10.3.1.65</code>.</p>
+
+<p>Flag: ATTT{CVE-2020-1181/hr01/10.3.1.65}</p>
+
+<h3 id="6-am-i-qualified-to-be-your-hacker">6. Am I qualified to be your hacker?</h3>
+
+<p>Bài này BTC cung cấp file save của Process Monitor, quan sát Process Tree, ta thấy tiến trình EQNEDT32.EXE đang call tiến trình con là powershell và cmd, nhìn phát ra ngay là CVE-2017-11882.</p>
+
+<p><img src="/assets/img/blog/7_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p>Phần còn lại là xác định file Word mà user hr01 đã mở, ta để ý time của tiến trình EQNEDT32.EXE start lúc 07:14:03, trong khoảng thời gian này chỉ có file CV-HuyTQ.doc là hoàn toàn phù hợp cho điều kiện trên.</p>
+
+<p><img src="/assets/img/blog/8_dientapnhnn_31032021.JPG" alt="IMG" /></p>
+
+<p>Flag: ATTT{CV-HuyTQ.doc;CVE-2017-11882}</p>
+
+<h2 id="0x02-pentest">0x02: Pentest</h2>
+
+<p>Vì server đã bị BTC đóng nên mình không viết chi tiết được nên chỉ nêu flow và cách thực hiện.</p>
+
+<h3 id="7-magic-flag-in-code">7. Magic flag in code</h3>
+
+<p>Bài này exploit thông qua lỗi PHP Deserialization - Phar Files.</p>
+
+<p>Ban đầu, tạo một shell code và lưu dưới dạng .jpg vì code chỉ check extenstion mà không check thông qua magic bytes. Tìm đến khai khác PHP Deserialization - Phar Files để từ file .jpg -&gt; file .php và đọc flag tại md5.php.</p>
+
+<p>Chi tiết các bạn có thể coi video của IppSec: <a href="https://www.youtube.com/watch?v=fHZKSCMWqF4">https://www.youtube.com/watch?v=fHZKSCMWqF4</a></p>
+
+<h3 id="10-hide-and-seek">10. Hide and Seek</h3>
+
+<p>Bài này sau khi sử dụng dirsearch, mình nhận thấy nếu muốn truy cập admin đều sẽ bị 403, tuy nhiên tại response trả về của server, mình nhận ra server đang chạy ApacheWebser tại port 8000 và dùng Nginx làm Reverse proxy. Loay hoay cách bypass theo dạng HttpSmugling thì đồng đội mình có dùng hint và thu về h2c. Kết hợp lại google mình thu về được: <a href="https://github.com/BishopFox/h2csmuggler">https://github.com/BishopFox/h2csmuggler</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>./h2csmuggler.py <span class="nt">-x</span> https://link.challenge http://localhost/admin
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Cảm ơn BTC!</p>
+
+<p>Cheer (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)</p>
+:ET

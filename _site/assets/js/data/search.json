@@ -1,0 +1,274 @@
+[
+  
+  {
+    "title": "[Research] Học cryptography (P.1)",
+    "url": "/posts/Reasearch-Hoc-cryptography-(P.1)/",
+    "categories": "Research, Cryptography",
+    "tags": "research, cryptography",
+    "date": "2021-07-18 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Dịch giặc hoành hành, nên mình có thời gian thêm ở nhà làm việc và research một vài thứ mới, hay ho và để bổ sung kiến thức. Mã hóa là một phần của CTF và ATTT; nên mình quyết định học crypto làm crypto viết crypto, một mảng mà mình chưa bao giờ đụng tới trước giờ.0x01: Mật mã họcMật mã có 2 dạng..."
+  },
+  
+  {
+    "title": "[Lỗi vu vơ] Thay đổi số tiền chuyển khoản SMS gửi về của ngân hàng MQĐ",
+    "url": "/posts/Loi-vu-vo-Thay-doi-so-tien-chuyen-khoan-SMS-cua-ngan-hang-MQD/",
+    "categories": "Research, Mobile, Android",
+    "tags": "research, android",
+    "date": "2021-05-16 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Vài hôm trước mình có được một người anh nhờ reverse và bypass các tính năng bảo mật cho ứng dụng của ngân hàng MQĐ trên Android; cũng lâu rồi chưa làm gì đụng lại đến Android nên mình thấy đây là một cách tốt để research thêm về các kĩ thuật trên Android.0x01: BypassVề cơ bản mình thấy app được ..."
+  },
+  
+  {
+    "title": "Decompile và Recompile ứng dụng APK",
+    "url": "/posts/Decompile-va-Recompile-APK/",
+    "categories": "Research, Mobile, Android",
+    "tags": "research, android",
+    "date": "2021-04-17 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Cách mình patch code và nghịch ngợm 1 file APK.0x01: Các công cụ cần thiết:Các bạn tải những công cụ:  apktool_Công cụ giúp chúng ta decompile từ 1 file APK sang mã nguồn smali và Recompile thành 1 file APK mới.  keytool_Công cụ giúp tạo certificate.  jarsigner_Công cụ giúp ký chữ ký được tạo từ ..."
+  },
+  
+  {
+    "title": "USB PCAP - Phần 1 Bàn phím",
+    "url": "/posts/USB-PCAP-P1-Keyboard/",
+    "categories": "Research, Forensics",
+    "tags": "research",
+    "date": "2021-04-07 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Một bài chia sẻ, tổng hợp kiến thức cá nhân giúp mình hoàn thành các thử thách truyền thông tin sử dụng giao thức USB sang PC/Laptop được capture thông qua Wireshark hoặc T-shark và lưu dưới tệp tin Pcap/Pcapng.0x01: Các định dạng truyền dữ liệuCó 4 định dạng truyền dữ liệu thông qua USB đó là:- ..."
+  },
+  
+  {
+    "title": "[Writeup] Diễn tập ATTT Ngân hàng Nhà Nước 31/03/2021",
+    "url": "/posts/Writeup-Dien-tap-ATTT-NHNN-03-2021/",
+    "categories": "Writeup",
+    "tags": "writeup",
+    "date": "2021-03-31 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "0x01: Ứng cứu sự cố, điều tra số1. Time2AttackTrong bài này, ban tổ chức (BTC) cung cấp 1 file pcap. Sau khi mở bằng wireshark ta có 1 file zip với tên time.zip. Nhận thấy đây là 1 file zip yêu cầu password để mở đồng thời thông tin trước đó BTC yêu cầu tool bruce force nên mình sử dụng john the ..."
+  },
+  
+  {
+    "title": "[Writeup] Hack The Box - Open Admin",
+    "url": "/posts/Hack-The-Box-Open-Admin/",
+    "categories": "Writeup, hackthebox",
+    "tags": "hackthebox, writeup",
+    "date": "2020-05-09 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "The way how I took user and root of this machine.0x01: LookingAccess the address of this machine I only can see the default index page of Apache2, so I used dirb &amp;amp; nmap to scan and knows more about this machine.Dirb resultNmap resultAccess /music I see the login function, and it redirect ..."
+  },
+  
+  {
+    "title": "Phân tích sơ bộ một email mã độc",
+    "url": "/posts/phan-tich-so-bo-mot-email-ma-doc/",
+    "categories": "Research, Malware",
+    "tags": "malware, Research",
+    "date": "2020-04-29 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Ngày đẹp trời nắng chói chang khắp Sài Gòn vừa nhộn nhịp trở lại sau 2 tuần tự cách ly, đang nhâm nhi 1 ly the coffee house và thưởng thức 1 quyển sách thì mình nhận được mẫu email mã độc forward từ một người bạn. Theo thói quen mình liền mở lên phân nó thử xem sao.Phân tích tĩnhSau khi tải file ..."
+  },
+  
+  {
+    "title": "[Writeup] Hack The Box - Traverxec",
+    "url": "/posts/Hack-The-Box-Traverxec/",
+    "categories": "Writeup, hackthebox",
+    "tags": "hackthebox, writeup",
+    "date": "2020-04-28 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "The way how I solved Traverxec machine.0x01: Access shellThe first step I always do is using Nmap to scan for open port(s) and service(s):$ nmap -sV -sT -sC 10.10.10.165And the output is:Let’s check the website:After checking and taking a look around the website, I realized this is just a static ..."
+  },
+  
+  {
+    "title": "[Writeup] Hexion CTF 2020",
+    "url": "/posts/Hexion-CTF-2020/",
+    "categories": "Writeup, HexionCTF2020",
+    "tags": "forensics, writeup, HexionCTF",
+    "date": "2020-04-13 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "MirateIn this challenge, we will see the flag after being encrypted; when we type some words to the text box, we will receive the encrypted words corresponding with our input words.And here is my cover:Flag: hexCTF{Don7_judge_a_B0Ok_by_1ts_c0v3r}T&amp;amp;JIn this challenge we receive the pcap fi..."
+  },
+  
+  {
+    "title": "Set up website with apache webserver and nginx waf reverse proxy",
+    "url": "/posts/setup-a-website-with-apache-webserver-and-nginx-waf-reverse-proxy/",
+    "categories": "Research",
+    "tags": "nginx, forensics, apache, webserver, system, waf",
+    "date": "2020-04-03 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "When I started thinking about running my site on my own server instead of using Blogger or Medium, etc… And after tried to use Apache, Nginx,… I realized that combining Apache and Nginx could be the best choice for me, because I want to use .htaccess of Apache and speed of Nginx. There come my ar..."
+  },
+  
+  {
+    "title": "[Writeup] BSidesSF 2019 CTF",
+    "url": "/posts/Writeup-BSidesSF-2019-CTF/",
+    "categories": "Writeup, 2019",
+    "tags": "BSidesSF, writeup",
+    "date": "2019-05-03 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "table-tennisSử dụng wireshark, mình thấy có khá nhiều certificate, tuy nhiên nhưng chứng chỉ này không làm được gì cả. Và số lượng gói tin cũng khá nhiều nên mình vào Statistics -&amp;gt; Conversations để xem các kết nối.Sau khi filter các kết nối của mạng 172.217.5.100 và 172.217.0.36 mình thấy ..."
+  },
+  
+  {
+    "title": "[Writeup] ASIS 2019 Quals - Flag collision",
+    "url": "/posts/Writeup-ASIS-2019-Quals-Flag-collision/",
+    "categories": "Writeup, ASIS2019",
+    "tags": "ASIS, writeup",
+    "date": "2019-04-22 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "In this challenge, we need to sumbit two string differene but same length and same crc 32. After I try to brute force two string with length is 15 and submit to server, I received the example of admin is two strings:  ASIS{4LEVv9no8} and ASIS{wpQ78d6lk}. These things help me alot becasue in next ..."
+  },
+  
+  {
+    "title": "[Writeup] Sunshine CTF 2019 - Forensics",
+    "url": "/posts/Writeup-Sunshine-CTF-2019-Forensics/",
+    "categories": "Writeup, SunshineCTF2019",
+    "tags": "SunshineCTF2019, writeup",
+    "date": "2019-04-01 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "GollyIt’s a code of Golly rle file, when I run a code given I just have a alphabet table:Run it and nothing else, I read a rle file document at here. And I know a “$” represents the end of each row and an optional “!” represents the end of the pattern. So I just copy the paragraph after !\\(\\) and..."
+  },
+  
+  {
+    "title": "[Writeup] Mates SS3 Round 4",
+    "url": "/posts/Writeup-Mates-SS3-Round-4/",
+    "categories": "Writeup, MatesCTF",
+    "tags": "writeup, forensics, ctf, programing",
+    "date": "2019-01-05 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "ProgramingĐề bài làm bắt chúng ta phải làm sao từ 2 bình nước x, y có thể tích vx, vy và phải đong nước làm sao cho được z lít. Đây là bài toàn đong nước kinh điển, may mắn là mình đã được học qua ở trường nên có thể làm được bài này một cách nhanh chóng bằng thuật toán dẫn luật.Soure code:Luat 1..."
+  },
+  
+  {
+    "title": "[Writeup] Mates SS3 Round 2",
+    "url": "/posts/Writeup-Mates-SS3-Round-2/",
+    "categories": "Writeup, MatesCTF",
+    "tags": "writeup, forensics, ctf",
+    "date": "2018-12-15 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Chúng ta có 2 file, một file dump và 1 file Login Data của Chrome. Btc yều cầu nhập mật khẩu của facebook -&amp;gt; flag là password của account được lưu trong file dump. Sau khi dùng volatility không thành công mình để ý đến header thì nó là file minidump mà dạng file này thì dùng mimikatz là be..."
+  },
+  
+  {
+    "title": "QR Code",
+    "url": "/posts/tim-hieu-ma-qr/",
+    "categories": "Research, Forensics",
+    "tags": "qrcode, forensics",
+    "date": "2018-12-02 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "QR là viết tắt của quick response, là một loại mã vạch đặc biệt có thể mã hóa thông tin như số, chữ cái, và kí tự kanji được tạo bởi công ty Denso-Wave là một công ty con của tập đoàn Toyota.Hiện nay có rất nhiều loại QR code như:  QR code model 1 &amp;amp; 2: loại chúng ta thường thấy.  Micro QR..."
+  },
+  
+  {
+    "title": "[Writeup] Mates SS2 Round 4 - Forensics caigidzay",
+    "url": "/posts/Mates-SS2-Round-4-Forensics-caigidzay/",
+    "categories": "Writeup",
+    "tags": "writeup, forensics, ctf",
+    "date": "2018-05-01 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "Trong thử thách này để bài là một file dump, mbr/dos nên mình sẽ dùng auto spy để mở nó xem sao. Đập vào mắt mình là flag.jpg.Mình tốn kha khá thời gian với bức ảnh này vì lúc đầu tưởng đây là thử thách về stegano tuy nhiên sau khi đọc lại miêu tả đề và thiết nghĩ thì nếu stegano thì ban tổ chức ..."
+  },
+  
+  {
+    "title": "[Writeup] VPNT Secathon 2018 - Misc",
+    "url": "/posts/Writeup-VNPT-Secathon-2018/",
+    "categories": "Writeup, VNPTSecathon2018",
+    "tags": "writeup, forensics, ctf",
+    "date": "2018-03-20 00:00:00 +0700",
+    
+
+
+
+
+
+    "snippet": "ChayngaydiTrong bài này ban tổ chức cho chúng ta đoạn teaser trailer Chạy ngay đi của Sếp.Ngay khi nhìn vào dung lượng của tập tin mp4, thì mình biết chắc chắn rằng nó đang giấu một file gì đó.Mở file mp4 bằng binwalk hay foremost cũng không thấy gì khác biệt, nên mình đành làm nước cuối cùng đó ..."
+  }
+  
+]
+

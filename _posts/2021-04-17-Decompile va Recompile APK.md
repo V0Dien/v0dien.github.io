@@ -2,7 +2,7 @@
 title : "Decompile và Recompile ứng dụng APK"
 author : "F4c3l3ss_"
 date : 2021-04-17
-tags : ["research, android"]
+tags : [research, android]
 categories: [Research, Mobile, Android]
 ---
 

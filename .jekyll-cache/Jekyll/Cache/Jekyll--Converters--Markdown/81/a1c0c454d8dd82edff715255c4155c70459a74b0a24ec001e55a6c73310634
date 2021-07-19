@@ -1,0 +1,2 @@
+I"%<p>Chúng ta có 2 file, một file dump và 1 file Login Data của Chrome. Btc yều cầu nhập mật khẩu của facebook -&gt; flag là password của account được lưu trong file dump. Sau khi dùng volatility không thành công mình để ý đến header thì nó là file minidump mà dạng file này thì dùng mimikatz là best. Bài này cũng hên là trong giải OtterCTF vừa rồi ngoài cách mình viết trong writeup thì có cách khác là dùng mimikatz như plugin của volatility nên mình có tìm hiểu.</p>
+:ET

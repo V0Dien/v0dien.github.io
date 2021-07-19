@@ -1,0 +1,147 @@
+I"�<h2 id="mirate">Mirate</h2>
+
+<p>In this challenge, we will see the flag after being encrypted; when we type some words to the text box, we will receive the encrypted words corresponding with our input words.</p>
+
+<p><img src="/assets/img/blog/mirage_image.jpg" alt="IMG" /></p>
+
+<p>And here is my cover:</p>
+
+<p><img src="/assets/img/blog/cover.jpg" alt="IMG" /></p>
+
+<p>Flag: hexCTF{Don7_judge_a_B0Ok_by_1ts_c0v3r}</p>
+
+<h2 id="tj">T&amp;J</h2>
+
+<p>In this challenge we receive the pcap file, after opening the file in Wireshark, it’s a USB capture pcap.</p>
+
+<p>Look at the leftover captured data, it only shows 4 bytes hex strings. Therefore, I realized there is a possibility that it can be a mouse capture, and the challenge’s description helped to ensure this idea more definitely.</p>
+
+<blockquote>
+  <p>Can you help Tom catch Jerry?</p>
+</blockquote>
+
+<p>Luckily, I did some research about USB capture (keyboard and mouse) before, so I know what action to take next. You can read <a href="https://www.rootusers.com/google-ctf-2016-forensic-for2-write-up/">this writeup of rootusers</a> to know more detail.</p>
+
+<p>First, I extracted USB data capture by tshark:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="gp">#</span><span class="w"> </span>tshark <span class="nt">-r</span> jerry.pcapng <span class="nt">-T</span> fields <span class="nt">-e</span> usb.capdata <span class="o">&gt;</span> 1.txt
+<span class="gp">#</span><span class="w"> </span><span class="nb">tail</span> <span class="nt">-n</span> 10 1.txt
+<span class="go">0000ff000000ffff
+00ff0000ffff0000
+0000ff000000ffff
+0000ff000000ffff
+00ff0000ffff0000
+00ff0000ffff0000
+00ff0000ffff0000
+00ff0000ffff0000
+0100000000000000
+0000000000000000
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p>For some reasons I do not know why my data lost <code class="language-plaintext highlighter-rouge">:</code> so I added it</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="gp">#</span><span class="w"> </span><span class="nb">tail</span> <span class="nt">-n</span> 10 2.txt 
+<span class="go">00:00:ff:00:00:00:ff:ff
+00:ff:00:00:ff:ff:00:00
+00:00:ff:00:00:00:ff:ff
+00:00:ff:00:00:00:ff:ff
+00:ff:00:00:ff:ff:00:00
+00:ff:00:00:ff:ff:00:00
+00:ff:00:00:ff:ff:00:00
+00:ff:00:00:ff:ff:00:00
+01:00:00:00:00:00:00:00
+00:00:00:00:00:00:00:00
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+<p>Next I change it to the coordinates</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre></td><td class="rouge-code"><pre><span class="gp">#</span><span class="w"> </span><span class="nb">awk</span> <span class="nt">-F</span>: <span class="s1">'function comp(v){if(v&gt;127)v-=256;return v}{x+=comp(strtonum("0x"$2));y+=comp(strtonum("0x"$3))}$1=="01"{print x,y}'</span> 2.txt <span class="o">&gt;</span> 3.txt
+<span class="gp">#</span><span class="w"> </span><span class="nb">tail</span> <span class="nt">-n</span> 10 data3.txt 
+<span class="go">1928 264
+1928 265
+1927 265
+1927 266
+1926 266
+1925 266
+1924 266
+1923 266
+1922 266
+-1701 29
+</span></pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>After got the coordinates, I plot it into Gnuplot.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre></td><td class="rouge-code"><pre><span class="gp">#</span><span class="w"> </span>gnuplot
+<span class="go">
+	G N U P L O T
+	Version 5.2 patchlevel 8    last modified 2019-12-01 
+
+	Copyright (C) 1986-1993, 1998, 2004, 2007-2019
+	Thomas Williams, Colin Kelley and many others
+
+	gnuplot home:     http://www.gnuplot.info
+	faq, bugs, etc:   type "help FAQ"
+	immediate help:   type "help"  (plot window: hit 'h')
+
+Terminal type is now 'qt'
+
+</span><span class="gp">gnuplot&gt;</span><span class="w"> </span>plot <span class="s1">'3.txt'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And here is it</p>
+
+<p><img src="/assets/img/blog/flag_jerry.png" alt="IMG" /></p>
+
+<p>Flag: hexCTF{y3t_an0th3r_pc4p_ch4ll3nge}</p>
+
+<p>P/S: Thank you GinaTU aka Tứ Diệp Thảo to help me edit this post</p>
+
+:ET

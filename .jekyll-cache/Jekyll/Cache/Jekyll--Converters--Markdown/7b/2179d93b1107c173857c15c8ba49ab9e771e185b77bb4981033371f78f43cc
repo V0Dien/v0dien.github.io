@@ -1,0 +1,51 @@
+I"o	<h2 id="golly">Golly</h2>
+
+<p>It’s a code of Golly rle file, when I run a code given I just have a alphabet table:</p>
+
+<p><img src="/assets/img/blog/sunshine2019-1.PNG" alt="IMG" /></p>
+
+<p>Run it and nothing else, I read a rle file document at here. And I know a “$” represents the end of each row and an optional “!” represents the end of the pattern. So I just copy the paragraph after !\(\) and I got</p>
+
+<p><img src="/assets/img/blog/sunshine2019-2.PNG" alt="IMG" /></p>
+
+<p>Flag: sun{th1s_w0nt_last}</p>
+
+<h2 id="castles">Castles</h2>
+
+<p>Open the file in HXD I saw something like a hint:</p>
+
+<p><code class="language-plaintext highlighter-rouge">Hey! Mario said something about a hidden key. Hesaid this: F2I and A1S, and that it was in two pieces</code></p>
+
+<p>Because this is 001 file so I use FTK Imager to open it. And I found an JPG image of Mario:</p>
+
+<p><img src="/assets/img/blog/Sunshine2019-AlmostThere.jpg" alt="IMG" /></p>
+
+<p>Because it is an JPG file and need a key to open it so I think the right tool would be steghide. Now I need to find a key to have a flag. With the hint above and in slack file in FTK I found something like a password of Castello_Di_Amorosa and Castelo_da_Feira I combined all of it and have a string:</p>
+
+<blockquote>
+  <p><em>AQ273RFGHUI91OLO987YTFGY78IK</em></p>
+</blockquote>
+
+<p><img src="/assets/img/blog/sunshine2019-3.PNG" alt="IMG" /></p>
+
+<p>Flag: flag{7H4NK5_F0R_PL4Y1NG}</p>
+
+<h2 id="we-will-we-will">We Will We Will</h2>
+
+<p>It’s img file so I used Autospy to open it, after do some stuff I realize I have a luks file.</p>
+
+<p><img src="/assets/img/blog/sunshine2019-4.PNG" alt="IMG" /></p>
+
+<p>Luks file is a encrypted image on Linux so I need a password. But I don’t have any hint of password so I think need brute force a password. Hashcat is a good tool for this.</p>
+
+<p><code class="language-plaintext highlighter-rouge">hashcat64.exe -a 0 -m 14600 luks rockyou.txt</code></p>
+
+<p>And the password  is: filosofia
+Mount it and I have flag is a partition name</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nv">$sudo</span> cryptsetup open b.luks flag
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Flag: sun{wrasslin}</p>
+:ET

@@ -1,0 +1,93 @@
+I"�<p><img src="/assets/img/blog/1_openadmin.png" alt="IMG" /></p>
+
+<p>The way how I took user and root of this machine.</p>
+
+<h2 id="0x01-looking">0x01: Looking</h2>
+
+<p>Access the address of this machine I only can see the default index page of Apache2, so I used <code class="language-plaintext highlighter-rouge">dirb</code> &amp; <code class="language-plaintext highlighter-rouge">nmap</code> to scan and knows more about this machine.</p>
+
+<p><img src="/assets/img/blog/2_dirb_result.png" alt="IMG" />
+<em>Dirb result</em></p>
+
+<p><img src="/assets/img/blog/3_nmap.png" alt="IMG" />
+<em>Nmap result</em></p>
+
+<p>Access <code class="language-plaintext highlighter-rouge">/music</code> I see the login function, and it redirect me to <code class="language-plaintext highlighter-rouge">/ona</code>. </p>
+
+<h2 id="0x02-accessshell">0x02: Access shell</h2>
+
+<p><img src="/assets/img/blog/4_opennet.png" alt="IMG" />
+<em>OpenNetAdmin</em></p>
+
+<p>After googling, I found RCE vulnerability, you can download the payload <a href="https://www.exploit-db.com/exploits/47691">here.</a>.</p>
+
+<p><img src="/assets/img/blog/5_oash.png" alt="IMG" /></p>
+
+<p>After cat <code class="language-plaintext highlighter-rouge">/etc/passwd</code>, I realize I may need to use the privilege escalation technique from <code class="language-plaintext highlighter-rouge">www-data</code> to 2 users <code class="language-plaintext highlighter-rouge">jimmy</code> and <code class="language-plaintext highlighter-rouge">joanna</code> before taking a <code class="language-plaintext highlighter-rouge">root</code>.</p>
+
+<h2 id="0x03-access-user1">0x03: Access user 1</h2>
+
+<p>Searching in the main folder of ona, I found the password to login one of the users in the database.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">cat local</span>/config/database_settings.inc.php
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/assets/img/blog/6_php.png" alt="IMG" /></p>
+
+<p>Tried on both users <code class="language-plaintext highlighter-rouge">jimmy</code> &amp; <code class="language-plaintext highlighter-rouge">jonna</code> I can logged-in with the username <code class="language-plaintext highlighter-rouge">jimmy</code> via ssh with its password.</p>
+
+<h2 id="0x04-access-user2">0x04: Access user 2</h2>
+
+<p>Searching in the machine I found in <code class="language-plaintext highlighter-rouge">/var/www</code> there is a directory <code class="language-plaintext highlighter-rouge">internal</code> with <code class="language-plaintext highlighter-rouge">jimmy</code> permission.</p>
+
+<p>After looking at the php source code, the workflow is  <code class="language-plaintext highlighter-rouge">index.php</code> »&gt; <code class="language-plaintext highlighter-rouge">main.php</code> and read the RSA key, but it can’t read because it does not have any permission.</p>
+
+<p>Use command <code class="language-plaintext highlighter-rouge">netstat -natpe</code> I realized that the php source code is running at <code class="language-plaintext highlighter-rouge">root</code> because the user id is 0. Because of that, I just need to access  <code class="language-plaintext highlighter-rouge">/main.php</code> and take the RSA private key.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span>curl 127.0.0.1:52846/main.php 
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p><img src="/assets/img/blog/7_mainphp.png" alt="IMG" />
+<em>RSA private key</em></p>
+
+<p>But it is not the end yet, I still need to find the passphrase of this private key to access via ssh.</p>
+
+<p>Use <code class="language-plaintext highlighter-rouge">john</code> and <code class="language-plaintext highlighter-rouge">rockyou</code> wordlist:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td> --><td class="rouge-code"><pre><span class="c"># python ssh2john.py joanna_pri_key &gt; joanna_pri_key.hash</span>
+<span class="c"># john --wordlist=/root/Downloads/rockyou.txt --format=SSH joanna_pri_key.hash</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>And the passphrase is: bloodninjas</p>
+
+<h2 id="0x05-accessroot">0x05: Access root</h2>
+
+<p>At /opt , we have a one file priv and it’s permission is </p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td> --><td class="rouge-code"><pre>352 <span class="nt">-rw-r</span> - r - 1 root root 0 Nov 22 23:49 priv
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Beside that, I also used sudo -l and knew that nano can be used under root permission without password. It means that I can use GTFOBins to privilege escalation to root.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td> --><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>nano priv
+^R^X
+reset<span class="p">;</span> sh 1&gt;&amp;0 2&gt;&amp;0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/assets/img/blog/8_root.png" alt="IMG" />
+<em>Got root</em></p>
+
+<p>And tada, I got root! That is how I own the user and root of this machine. Hope you guys learned something new from this machine.</p>
+
+<p>Cheers! 👍</p>
+
+<p>P/S: Thank you GinaTU aka Tứ Diệp Thảo to help me edit this post</p>
+
+:ET

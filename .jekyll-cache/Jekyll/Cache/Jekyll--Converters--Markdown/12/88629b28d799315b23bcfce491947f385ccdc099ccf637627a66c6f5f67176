@@ -1,0 +1,2 @@
+I"z<p>When I started thinking about running my site on my own server instead of using Blogger or Medium, etc… And after tried to use Apache, Nginx,… I realized that combining Apache and Nginx could be the best choice for me, because I want to use <code class="language-plaintext highlighter-rouge">.htaccess</code> of Apache and speed of Nginx. There come my architecture:</p>
+:ET

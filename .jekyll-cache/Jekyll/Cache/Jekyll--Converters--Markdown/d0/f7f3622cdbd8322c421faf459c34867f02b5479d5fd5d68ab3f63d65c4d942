@@ -1,0 +1,115 @@
+I"� <h2 id="programing">Programing</h2>
+<p>Đề bài làm bắt chúng ta phải làm sao từ 2 bình nước x, y có thể tích vx, vy và phải đong nước làm sao cho được z lít. Đây là bài toàn đong nước kinh điển, may mắn là mình đã được học qua ở trường nên có thể làm được bài này một cách nhanh chóng bằng thuật toán dẫn luật.</p>
+
+<p>Soure code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td> --><td class="rouge-code"><pre>Luat 1: Neu VX day thi do nuoc trong binh X di               
+Luat 2: Neu VY rong thi do day nuoc cho binh Y
+Luat 3: Neu VX khong day va VY khong rong thi 
+trut nuoc tu binh Y sang binh X cho den khi binh X day    
+
+e lam rong binh
+f lam day binh
+o do tu binh nay sang binh kia
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><!-- <td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre></td> --><td class="rouge-code"><pre><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">host</span> <span class="o">=</span> <span class="s">'125.235.240.166'</span>
+
+<span class="n">port</span> <span class="o">=</span>  <span class="mi">11223</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="n">host</span><span class="p">,</span><span class="n">port</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">dongnuoc</span><span class="p">(</span><span class="n">Vx</span><span class="p">,</span><span class="n">Vy</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">x</span><span class="o">!=</span><span class="n">z</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">y</span><span class="o">!=</span><span class="n">z</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">Vx</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">'1:e_'</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">Vy</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">'2:f_'</span>
+        <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Vx</span><span class="o">-</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>             
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">k</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="n">k</span> 
+            <span class="n">s</span> <span class="o">+=</span> <span class="s">'2:o_'</span>
+    <span class="k">return</span> <span class="n">s</span>
+
+<span class="k">def</span> <span class="nf">agr</span><span class="p">():</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'1: '</span><span class="p">)</span>
+    <span class="n">Vx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">).</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'2: '</span><span class="p">)</span>
+    <span class="n">Vy</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">).</span><span class="n">strip</span><span class="p">())</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'z: '</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">).</span><span class="n">strip</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">Vx</span><span class="p">,</span><span class="n">Vy</span><span class="p">,</span><span class="n">z</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>   
+    <span class="n">Vx</span><span class="p">,</span><span class="n">Vy</span><span class="p">,</span><span class="n">z</span> <span class="o">=</span> <span class="n">agr</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">dongnuoc</span><span class="p">(</span><span class="n">Vx</span><span class="p">,</span><span class="n">Vy</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'op&gt; '</span><span class="p">)</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">r</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="n">r</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="forensics">Forensics</h3>
+<p>Đề bài là một file pcap với giao thức chính là NTP và data strem là một chuỗi base64 nhưng không decode ra gì cả, sau khi xem tổng thể mình để ý thấy có 1 gói tin Malformed packet tra google mình biết đó là PNG bị hỏng trong quá trình chuyển tin. Để ý lại một lần nữa mình mới thấy là bản thân khá fail khi chỉ loại 1 loạt dấu !!! mà không thử loại loạt chữ AAA ở đầu. Thử decdoe bằng đoạn mới mình có một bức ảnh PNG chứa flag:</p>
+
+<p><img src="/assets/img/blog/matesss3r4.jpg" alt="IMG" /></p>
+:ET
