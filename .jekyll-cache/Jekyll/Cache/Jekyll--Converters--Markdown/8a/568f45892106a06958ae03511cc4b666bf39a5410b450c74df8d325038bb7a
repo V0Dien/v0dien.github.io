@@ -1,2 +1,0 @@
-I"w<p>In this challenge, we need to sumbit two string differene but same length and same crc 32. After I try to brute force two string with length is 15 and submit to server, I received the example of admin is two strings:  ASIS{4LEVv9no8} and ASIS{wpQ78d6lk}. These things help me alot becasue in next stages, server will request random length of 2 strings but same crc32.</p>
-:ET
