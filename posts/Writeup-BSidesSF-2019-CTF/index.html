@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en" mode="dark" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="theme" content="Chirpy v2.7.2"><meta name="generator" content="Jekyll v4.2.0" /><meta property="og:title" content="[Writeup] BSidesSF 2019 CTF" /><meta name="author" content="F4c3l3ss_" /><meta property="og:locale" content="en_US" /><meta name="description" content="table-tennis" /><meta property="og:description" content="table-tennis" /><link rel="canonical" href="https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/" /><meta property="og:url" content="https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/" /><meta property="og:site_name" content="Vô Diện (@F4c3l3ss_)" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2019-05-03T00:00:00+07:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="[Writeup] BSidesSF 2019 CTF" /><meta name="twitter:site" content="@F4c3l3ss_" /><meta name="twitter:creator" content="@F4c3l3ss_" /><meta name="google-site-verification" content="google_meta_tag_verification" /> <script type="application/ld+json"> {"author":{"@type":"Person","name":"F4c3l3ss_"},"description":"table-tennis","headline":"[Writeup] BSidesSF 2019 CTF","dateModified":"2019-05-03T00:00:00+07:00","datePublished":"2019-05-03T00:00:00+07:00","url":"https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/"},"@context":"https://schema.org"}</script><title>[Writeup] BSidesSF 2019 CTF | Vô Diện (@F4c3l3ss_)</title><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png"><link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png"><link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png"><link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicons/android-icon-192x192.png"><link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png"><link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/assets/img/favicons/manifest.json"><meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'><meta name="msapplication-TileColor" content="#ffffff"><meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://fonts.gstatic.com"><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="use-credentials"><link rel="dns-prefetch" href="https://www.google-analytics.com"><link rel="preconnect" href="https://www.googletagmanager.com" crossorigin="anonymous"><link rel="dns-prefetch" href="https://www.googletagmanager.com"><link rel="preconnect" href="cdn.jsdelivr.net"><link rel="dns-prefetch" href="cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous"><link rel="preload" href="/assets/css/post.css" as="style"><link rel="stylesheet" href="/assets/css/post.css"><link rel="preload" as="style" href="/assets/css/lib/bootstrap-toc.min.css"><link rel="stylesheet" href="/assets/css/lib/bootstrap-toc.min.css" /> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script> <script async src="/assets/js/post.min.js"></script> <script defer src="/app.js"></script> <script defer src="https://www.googletagmanager.com/gtag/js?id="></script> <script> document.addEventListener("DOMContentLoaded", function(event) { window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', ''); }); </script><body data-spy="scroll" data-target="#toc"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/" alt="avatar" class="mx-auto"> <img src="/assets/img/sample/avatar.jpg" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/">Vô Diện (@F4c3l3ss_)</a></div><div class="site-subtitle font-italic">Hi! 👻</div></div><ul class="w-100"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/tabs/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tabs/tags/" class="nav-link"> <i class="fa-fw fas fa-tags ml-xl-3 mr-xl-3 unloaded"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/tabs/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/tabs/about/" class="nav-link"> <i class="fa-fw fas fa-info ml-xl-3 mr-xl-3 unloaded"></i> <span>ABOUT</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center"> <a href="https://github.com/V0Dien" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github-alt"></i> </a> <a href="https://twitter.com/F4c3l3ss_" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['v0dien','outlook.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper" class="row justify-content-center topbar-down"><div id="topbar" class="col-11 d-flex h-100 align-items-center justify-content-between"> <span id="breadcrumb"> <span> <a href="/"> Posts </a> </span> <span>[Writeup] BSidesSF 2019 CTF</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" placeholder="Search..."> <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i> </span> <span id="search-cancel" >Cancel</span></div></div><div id="main-wrapper"><div id="main"><div class="row"><div id="post-wrapper" class="col-12 col-lg-11 col-xl-8"><div class="post pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><h1 data-toc-skip>[Writeup] BSidesSF 2019 CTF</h1><div class="post-meta text-muted d-flex flex-column"><div> <span class="timeago " data-toggle="tooltip" data-placement="bottom" title="Fri, May 3, 2019, 12:00 AM +0700" > May 3, 2019 <i class="unloaded">2019-05-03T00:00:00+07:00</i> </span> by <span class="author"> F4c3l3ss_ </span></div><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="996 words">5 min</span></div></div><div class="post-content"><h2 id="table-tennis">table-tennis</h2><p>Sử dụng wireshark, mình thấy có khá nhiều certificate, tuy nhiên nhưng chứng chỉ này không làm được gì cả. Và số lượng gói tin cũng khá nhiều nên mình vào Statistics -&gt; Conversations để xem các kết nối.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-1.PNG" alt="IMG" /></p><p>Sau khi filter các kết nối của mạng 172.217.5.100 và 172.217.0.36 mình thấy rằng đó là các gói tin ICMP, request và reply data có đều có chứa mã base64, vì không rành về thư viện scappy lắm và một phần là chuỗi cũng khá ngắn nên mình quyết định là làm bằng tay.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-2.PNG" alt="IMG" /></p><p>Và chỉ sau chừng 5 phút mình đã có được đoạn base64 hoàn chỉnh:</p><blockquote><p>Q1RGe0p1c3RBMHV0UDFuUzBuZ0FiZ1Awbmd9</p></blockquote><p>Flag: CTF{JustA0utP1nS0ngAbgP0ng}</p><h2 id="goodlusk1">goodlusk1</h2><p>Ban tổ chức cho mình một file img nên mình dùng Autospy để mở. Bên trong chứa một file LUKS và không có gì khác nên mình extract file đó ra. Google cho mình biết đó là file ổ đĩa đã bị mã hóa của hệ điều hành Linux nên mình coppy vào máy ảo Linux để thực hiện.</p><div class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="nv">$ </span><span class="nb">sudo </span>cryptsetup open <span class="nt">--type</span> luks b.luks <span class="nb">test</span>
+</pre></table></code></div></div><p>Và dĩ nhiên vì là file đã mã hóa nên mình cần 1 password. File ảnh kèm theo cho chúng ta gợi ý về password và sau khi search tung google và nhìn thật kỹ vào bức anh, mình đã tìm ra đó là EFF passphrase. Để so khớp với các số đã cho mình dùng link này để có được password. Password là</p><p><code class="language-plaintext highlighter-rouge">wages upturned flogging rinse landmass number</code></p><p>Sau khi có được password mount ỗ đĩa và mình có được flag.</p><p>Flag: CTF{Look_Under_Keyboards_4_Secrets}</p><h2 id="thekey">thekey</h2><p>Một file pcap bắt gói tin bàn phím nhập vào, một dạng khá phổ biến. Về tài liệu các bạn có thể tham khảo tại <a href="https://www.usb.org/sites/default/files/documents/hut1_12v2.pdf">đây</a>. Trong file pcap ở cột left over data sẽ cho chúng ta biết được mã hex của ký tự đươc nhập vào sau đó so sánh trong bảng ký tự của tài liệu mà mình để ở trên để decode ra được phím nào đã được nhập.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-3.PNG" alt="IMG" /></p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-4.PNG" alt="IMG" /></p><p>Tuy nhiên scappy có hỗ trợ cho nên mình dùng scappy. Source code:</p><div class="language-python highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+</pre><td class="rouge-code"><pre><span class="c1">#!/usr/bin/python
+</span><span class="kn">from</span> <span class="nn">scapy.all</span> <span class="kn">import</span> <span class="o">*</span>
+ 
+<span class="n">KEY_CODES</span> <span class="o">=</span> <span class="p">{</span>
+<span class="mi">4</span><span class="p">:</span><span class="s">"A"</span><span class="p">,</span>
+<span class="mi">5</span><span class="p">:</span><span class="s">"B"</span><span class="p">,</span>
+<span class="mi">6</span><span class="p">:</span><span class="s">"C"</span><span class="p">,</span>
+<span class="mi">7</span><span class="p">:</span><span class="s">"D"</span><span class="p">,</span>
+<span class="mi">8</span><span class="p">:</span><span class="s">"E"</span><span class="p">,</span>
+<span class="mi">9</span><span class="p">:</span><span class="s">"F"</span><span class="p">,</span>
+<span class="mi">10</span><span class="p">:</span><span class="s">"G"</span><span class="p">,</span>
+<span class="mi">11</span><span class="p">:</span><span class="s">"H"</span><span class="p">,</span>
+<span class="mi">12</span><span class="p">:</span><span class="s">"I"</span><span class="p">,</span>
+<span class="mi">13</span><span class="p">:</span><span class="s">"J"</span><span class="p">,</span>
+<span class="mi">14</span><span class="p">:</span><span class="s">"K"</span><span class="p">,</span>
+<span class="mi">15</span><span class="p">:</span><span class="s">"L"</span><span class="p">,</span>
+<span class="mi">16</span><span class="p">:</span><span class="s">"M"</span><span class="p">,</span>
+<span class="mi">17</span><span class="p">:</span><span class="s">"N"</span><span class="p">,</span>
+<span class="mi">18</span><span class="p">:</span><span class="s">"O"</span><span class="p">,</span>
+<span class="mi">19</span><span class="p">:</span><span class="s">"P"</span><span class="p">,</span>
+<span class="mi">20</span><span class="p">:</span><span class="s">"Q"</span><span class="p">,</span>
+<span class="mi">21</span><span class="p">:</span><span class="s">"R"</span><span class="p">,</span>
+<span class="mi">22</span><span class="p">:</span><span class="s">"S"</span><span class="p">,</span>
+<span class="mi">23</span><span class="p">:</span><span class="s">"T"</span><span class="p">,</span>
+<span class="mi">24</span><span class="p">:</span><span class="s">"U"</span><span class="p">,</span>
+<span class="mi">25</span><span class="p">:</span><span class="s">"V"</span><span class="p">,</span>
+<span class="mi">26</span><span class="p">:</span><span class="s">"W"</span><span class="p">,</span>
+<span class="mi">27</span><span class="p">:</span><span class="s">"X"</span><span class="p">,</span>
+<span class="mi">28</span><span class="p">:</span><span class="s">"Y"</span><span class="p">,</span>
+<span class="mi">29</span><span class="p">:</span><span class="s">"Z"</span><span class="p">,</span>
+<span class="mi">30</span><span class="p">:</span><span class="s">"1"</span><span class="p">,</span>
+<span class="mi">31</span><span class="p">:</span><span class="s">"2"</span><span class="p">,</span>
+<span class="mi">32</span><span class="p">:</span><span class="s">"3"</span><span class="p">,</span>
+<span class="mi">33</span><span class="p">:</span><span class="s">"4"</span><span class="p">,</span>
+<span class="mi">34</span><span class="p">:</span><span class="s">"5"</span><span class="p">,</span>
+<span class="mi">35</span><span class="p">:</span><span class="s">"6"</span><span class="p">,</span>
+<span class="mi">36</span><span class="p">:</span><span class="s">"7"</span><span class="p">,</span>
+<span class="mi">37</span><span class="p">:</span><span class="s">"8"</span><span class="p">,</span>
+<span class="mi">38</span><span class="p">:</span><span class="s">"9"</span><span class="p">,</span>
+<span class="mi">39</span><span class="p">:</span><span class="s">"0"</span><span class="p">,</span>
+<span class="mi">40</span><span class="p">:</span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+<span class="mi">44</span><span class="p">:</span><span class="s">" "</span><span class="p">,</span>
+<span class="mi">45</span><span class="p">:</span><span class="s">"_"</span><span class="p">,</span>
+<span class="mi">46</span><span class="p">:</span><span class="s">"="</span><span class="p">,</span>
+<span class="mi">47</span><span class="p">:</span><span class="s">"{"</span><span class="p">,</span>
+<span class="mi">48</span><span class="p">:</span><span class="s">"}"</span><span class="p">,</span>
+<span class="mi">49</span><span class="p">:</span><span class="s">"|"</span><span class="p">,</span>
+<span class="p">}</span>
+ 
+<span class="n">pkts</span> <span class="o">=</span> <span class="n">rdpcap</span><span class="p">(</span><span class="s">"thekey.pcapng"</span><span class="p">)</span>
+<span class="n">msg</span><span class="o">=</span> <span class="s">""</span>
+<span class="k">for</span> <span class="n">packet</span> <span class="ow">in</span> <span class="n">pkts</span><span class="p">:</span>
+    <span class="k">global</span> <span class="n">msg</span>
+    <span class="n">hid_report</span> <span class="o">=</span> <span class="n">packet</span><span class="p">.</span><span class="n">load</span><span class="p">[</span><span class="o">-</span><span class="mi">8</span><span class="p">:]</span>
+    <span class="n">key_code</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="n">hid_report</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">KEY_CODES</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key_code</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ch</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">+=</span> <span class="n">ch</span>
+ 
+<span class="k">print</span> <span class="n">msg</span>
+</pre></table></code></div></div><p>Sau khi decrypt mình nhận được một chuỗi khá lạ đó là:</p><blockquote><p>MC3AVIIM FLAAGTTXT ITTHE FLAAG IS CTFVBUUA{{MY_FAVORITTE_EDITOR_IS_VIM}HHHHHHHHHHHHHHHHHHHAUVI{UWQ`</p></blockquote><p>Hm, mình stuck ở đoạn này vì có thể tác giả làm gì đó liên quan tới vim, tuy nhiên để ý lại thì tất cả đều clear nhưng chữ FAVORITTE lại sai chính tả nên mình sửa lại và submit thử sem sao. Ngạc nhiên là nó lại đúng và có 100 điểm.</p><p>Flag: CTF{MY_FAVOURITE_EDITOR_IS_VIM}</p><h2 id="bwf0cnlvc2hr-yq">bWF0cnlvc2hr YQ==</h2><p>Đề bài cho mình file .eml nên mình dùng EML Reader trong Microsoft Store để mở nó. Trong file đính kèm mình có 2 file là hack.pgp và Matry_Oshka.key, bên cạnh đó đồng đội mình sử dụng notepad cũng có thấy một đoạn base64 và khi decrypt thì ra một ảnh qr code có nội dung <strong>h4ck_the_plan3t</strong>.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-5.PNG" alt="IMG" /></p><p>Sử dụng gpg trong linux để decrypt:</p><div class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="nv">$ </span>gpg <span class="nt">--import</span> Matry_Oshka.key
+
+gpg: key 69D5F0038A289FB1: public key <span class="s2">"Matry Oshka &lt;Matry.Oshka@gmail.com&gt;"</span> imported
+gpg: key 69D5F0038A289FB1: secret key imported
+gpg: Total number processed: 1
+gpg:               imported: 1
+gpg:       secret keys <span class="nb">read</span>: 1
+gpg:   secret keys imported: 1
+
+<span class="nv">$ </span>gpg <span class="nt">--list-key</span>
+
+pub   rsa2048 2019-03-01 <span class="o">[</span>SC] <span class="o">[</span>expires: 2021-02-28]
+      0C7BCBBADF0C5273E797318069D5F0038A289FB1
+uid           <span class="o">[</span> unknown] Matry Oshka &lt;Matry.Oshka@gmail.com&gt;
+sub   rsa2048 2019-03-01 <span class="o">[</span>E] <span class="o">[</span>expires: 2021-02-28]
+
+<span class="nv">$ </span>gpg <span class="nt">-o</span> out <span class="nt">--decrypt</span> hack.pgp 
+gpg: encrypted with 2048-bit RSA key, ID E5CAE1F0A16B0E7A, created 2019-03-01
+      <span class="s2">"Matry Oshka &lt;Matry.Oshka@gmail.com&gt;"</span>
+</pre></table></code></div></div><p>Check thử xem thì file out là file zip</p><div class="language-bash highlighter-rouge"><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="nv">$ </span>file out
+out: Zip archive data, at least v2.0 to extract
+</pre></table></code></div></div><p>Sau khi extract file zip và dùng binwalk, mình thấy có một file lzip ở offset thứ 10, tiến hành dump file và giải nén mình có được một file pdf chứa ảnh nền windows xp huyền thoại. Sau khi dùng adobe acrobat, mình extract được file ảnh ra ngoài. Đoạn này khá là tiếc khi trong cuộc thi mình chỉ extract file jpg nên stuck và không thể giải quyết được lúc giải diễn ra. Chỉ hôm sau mình extract bằng file bitmap thì mới có thể làm đúng hướng khi admin nói mình nên tra wiki ảnh gốc. Dùng stegsolve mình có được 1 mã qr lỗi.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-6.PNG" alt="IMG" /></p><p>Sau khi sửa lại bằng cách đổi pixel trắng thành đen và ngược lại, mình có được một mã qr hoàn hảo.</p><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-7.PNG" alt="IMG" /></p><p>Và mình có được đoạn base64:</p><blockquote><p>/Td6WFoAAATm1rRGAgAhARwAAAAQz1jM4ELCAORdABhgwwZfNTLh1bKR4pwkkcJw0DSEZd2BcWATAJkrMgnKT8nBgYQaCPtrzORiOeUVq7DDoe9feCLt9PG-MT9ZCLwmtpdfvW0n17pie8v0h7RS4dO/yb7JHn7sFqYYnDWZere/6BI3AiyraCtQ6qZmYZnHemfLVXmCXHan5fN6IiJL7uJdoJBZC3Rb1hiH1MdlFQ/1uOwaoglBdswAGo99HbOhsSFS5gGqo6WQ2dzK3E7NcYP2YIQxS9BGibr4Qulc6e5CaCHAZ4pAhfLVTYoN5R7l/cWvU3mLOSPUkELK6StPUBd0AABBU17Cf970JQABgALDhQEApzo4PbHEZ/sCAAAAAARZWg==</p></blockquote><p>Decode mình có được một file 7zip và bên trong là một file text chứa mã nhị phân. Decode mã nhị phân theo các bước:</p><ul><li>Nhị phân -&gt; ascii, mình có được dãy số<li>Bát phân -&gt; thập phân<li>Thập phân -&gt; ascii có đươc mã hex<li>Từ hex -&gt; base 64<li>Tử base 64 -&gt; base 85<li>Từ base 85 -&gt; flag</ul><p><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/assets/img/blog/BSidesSF2019-8.PNG" alt="IMG" /></p><h2 id="zippy">Zippy</h2><p>File pcap cho mình biết được câu lệnh unzip file flag.zip. Và file flag.zip được lưu từ gói tin thứ 6 dến gói tin thứ 13. Extract file zip và giải nén với password: supercomplexpassword, mình có được flag.</p><p>Flag: CTF{this_flag_is_your_flag}</p></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/categories/writeup/'>Writeup</a>, <a href='/categories/2019/'>2019</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/tags/bsidessf/" class="post-tag no-text-decoration" >BSidesSF</a> <a href="/tags/writeup/" class="post-tag no-text-decoration" >writeup</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> by the author.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=[Writeup] BSidesSF 2019 CTF - Vô Diện (@F4c3l3ss_)&url=https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=[Writeup] BSidesSF 2019 CTF - Vô Diện (@F4c3l3ss_)&u=https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/" data-toggle="tooltip" data-placement="top" title="Facebook" target="_blank" rel="noopener" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://telegram.me/share?text=[Writeup] BSidesSF 2019 CTF - Vô Diện (@F4c3l3ss_)&url=https://v0dien.github.io/posts/Writeup-BSidesSF-2019-CTF/" data-toggle="tooltip" data-placement="top" title="Telegram" target="_blank" rel="noopener" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <i class="fa-fw fas fa-link small" onclick="copyLink()" data-toggle="tooltip" data-placement="top" title="Copy link"></i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted topbar-down"><div class="access"><div id="access-lastmod" class="post"> <span>Recent Update</span><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/posts/Decompile-va-Recompile-APK/">Decompile và Recompile ứng dụng APK</a><li><a href="/posts/USB-PCAP-P1-Keyboard/">USB PCAP - Phần 1 Bàn phím</a><li><a href="/posts/Writeup-Dien-tap-ATTT-NHNN-03-2021/">[Writeup] Diễn tập ATTT Ngân hàng Nhà Nước 31/03/2021</a></ul></div><div id="access-tags"> <span>Trending Tags</span><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/tags/writeup/">writeup</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/research/">research</a> <a class="post-tag" href="/tags/hackthebox/">hackthebox</a> <a class="post-tag" href="/tags/android/">android</a> <a class="post-tag" href="/tags/apache/">apache</a> <a class="post-tag" href="/tags/asis/">ASIS</a> <a class="post-tag" href="/tags/bsidessf/">BSidesSF</a> <a class="post-tag" href="/tags/cryptography/">cryptography</a></div></div></div><div id="toc-wrapper" class="pl-0 pr-4 mb-5"> <span class="pl-3 pt-2 mb-2">Contents</span><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div class="col-12 col-lg-11 col-xl-8"><div id="post-extend-wrapper" class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-md-4 pr-md-4"><div id="related-posts" class="mt-5 mb-2 mb-sm-4"><h3 class="pt-2 mt-1 mb-4 ml-1" data-toc-skip>Further Reading</h3><div class="card-deck mb-4"><div class="card"> <a href="/posts/Hexion-CTF-2020/"><div class="card-body"> <span class="timeago small" > Apr 13, 2020 <i class="unloaded">2020-04-13T00:00:00+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Writeup] Hexion CTF 2020</h3><div class="text-muted small"><p> Mirate In this challenge, we will see the flag after being encrypted; when we type some words to the text box, we will receive the encrypted words corresponding with our input words. And here i...</p></div></div></a></div><div class="card"> <a href="/posts/Hack-The-Box-Traverxec/"><div class="card-body"> <span class="timeago small" > Apr 28, 2020 <i class="unloaded">2020-04-28T00:00:00+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Writeup] Hack The Box - Traverxec</h3><div class="text-muted small"><p> The way how I solved Traverxec machine. 0x01: Access shell The first step I always do is using Nmap to scan for open port(s) and service(s): 1 $ nmap -sV -sT -sC 10.10.10.165 And the output is:...</p></div></div></a></div><div class="card"> <a href="/posts/Hack-The-Box-Open-Admin/"><div class="card-body"> <span class="timeago small" > May 9, 2020 <i class="unloaded">2020-05-09T00:00:00+07:00</i> </span><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[Writeup] Hack The Box - Open Admin</h3><div class="text-muted small"><p> The way how I took user and root of this machine. 0x01: Looking Access the address of this machine I only can see the default index page of Apache2, so I used dirb &amp; nmap to scan and knows ...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/posts/Writeup-ASIS-2019-Quals-Flag-collision/" class="btn btn-outline-primary"><p>[Writeup] ASIS 2019 Quals - Flag collision</p></a> <a href="/posts/setup-a-website-with-apache-webserver-and-nginx-waf-reverse-proxy/" class="btn btn-outline-primary"><p>Set up website with apache webserver and nginx waf reverse proxy</p></a></div></div></div></div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script> <script type="text/javascript"> const imgs = document.querySelectorAll('#post-wrapper img'); const observer = lozad(imgs); observer.observe(); </script><footer class="d-flex w-100 justify-content-center"><div class="d-flex justify-content-between align-items-center"><div class="footer-left"><p class="mb-0"> © 2021 <a href="https://twitter.com/F4c3l3ss_">Vô Diện (@F4c3l3ss_)</a>. <span data-toggle="tooltip" data-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy/" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-xl-11 post-content"><div id="search-hints"><h4 class="text-muted mb-4">Trending Tags</h4><a class="post-tag" href="/tags/writeup/">writeup</a> <a class="post-tag" href="/tags/forensics/">forensics</a> <a class="post-tag" href="/tags/ctf/">ctf</a> <a class="post-tag" href="/tags/research/">research</a> <a class="post-tag" href="/tags/hackthebox/">hackthebox</a> <a class="post-tag" href="/tags/android/">android</a> <a class="post-tag" href="/tags/apache/">apache</a> <a class="post-tag" href="/tags/asis/">ASIS</a> <a class="post-tag" href="/tags/bsidessf/">BSidesSF</a> <a class="post-tag" href="/tags/cryptography/">cryptography</a></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a> <script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.7.3/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="https://v0dien.github.io{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"><div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>{categories}</div><div><i class="fa fa-tag fa-fw"></i>{tags}</div></div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">Oops! No result founds.</p>' }); </script>
